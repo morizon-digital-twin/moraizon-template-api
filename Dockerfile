@@ -1,33 +1,33 @@
-# Start from the geospatial base (which already has many system deps)
+# syntax=docker/dockerfile:1
 FROM rocker/geospatial
 
-# 1. Install system dependencies for plumber and specific R packages
+# 1. System-Abhangigkeiten
 RUN apt-get update -qq && apt-get install -y \
     libssl-dev \
     libcurl4-gnutls-dev \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# 2. Set up the working directory
 WORKDIR /app
 
-# 3. Install renv and restore the environment
-# We copy only the files needed for installation first to leverage Docker caching
-COPY renv.lock renv.lock
-COPY .Rprofile .Rprofile
+# 2. Renv Cache-Pfad fur den Container definieren
+ENV RENV_PATHS_CACHE=/root/.local/share/renv
+
+# 3. Nur die fur die Installation notigen Dateien kopieren
+COPY renv.lock .Rprofile ./
 COPY renv/activate.R renv/activate.R
 COPY renv/settings.json renv/settings.json
 
-# Define the renv cache location
-ENV RENV_PATHS_LIBRARY renv/library
+# 4. Restore mit Cache-Mount und Noble-Binaries
+# RENV_CONFIG_REPOS_OVERRIDE stellt sicher, dass renv das Repo beim Restore wirklich nutzt
+RUN --mount=type=cache,target=/root/.local/share/renv \
+    RENV_CONFIG_REPOS_OVERRIDE="https://packagemanager.posit.co/cran/__linux__/noble/latest" \
+    R -e "renv::restore()"
 
-# Restore the R packages (this replaces your manual list)
-RUN R -e "renv::restore()"
-
-# 4. Copy the rest of the application
+# 5. Restlichen Code kopieren
 COPY . .
 
-# 5. Setup Entrypoint
+# 6. Entrypoint Setup
 RUN cp entrypoint.sh /usr/local/bin/entrypoint.sh && \
     chmod +x /usr/local/bin/entrypoint.sh
 
