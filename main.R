@@ -43,7 +43,7 @@ pg_pass <- Sys.getenv("PG_PASS")
 pg_user <- Sys.getenv("PG_USER")
 pg_db <- Sys.getenv("PG_DB")
 
-
+print(123)
 message("Verbinde mit PostgreSQL...")
 
 # PostgreSQL Verbindung
