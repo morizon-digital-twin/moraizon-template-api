@@ -1,12 +1,12 @@
 services:
-  moraizon-notfallversorgung-api:
+  api:  # Dieser Key muss statisch bleiben
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: moraizon-notfallversorgung-api
+    image: ${PROJECT_NAME}:latest  # Variable hier moglich
+    container_name: ${PROJECT_NAME} # Variable hier moglich
     restart: "no"
     ports:
-      - "7006:7006"
+      - "${API_PORT}:${API_PORT}"
     env_file:
       - .env
-      

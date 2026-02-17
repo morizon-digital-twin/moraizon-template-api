@@ -31,27 +31,29 @@ function(pr) {
         plumber::forward()
       }
     }) %>% 
+    #mount rest_controller here ...
+    pr_mount("/notfall", plumb("./rest_controller.R")) %>% 
     
-    pr_mount("/notfall", plumb("./rest_controller_notfall.R")) %>% 
+    #speficiy api documents here
     pr_set_api_spec(function(spec) {
       
       
-      spec$paths$`/notfall/update_notfall_location`$post$summary <- "Perform a an analysis of emergency facility accessiblity"
-      
-
-      spec$paths$`/notfall/update_notfall_location`$post$requestBody <- list(
-        description = "Example request body",
-        required = TRUE,
-        content = list(
-          `application/json` = list(
-            # OpenAPI 3.0 expects 'example' or 'examples' here
-            schema = list(
-              type = "object",
-              example = fromJSON("sample_request_update.json", simplifyVector = T)
-            )
-          )
-        )
-      )
+      # spec$paths$`/notfall/update_notfall_location`$post$summary <- "Perform a an analysis of emergency facility accessiblity"
+      # 
+      # 
+      # spec$paths$`/notfall/update_notfall_location`$post$requestBody <- list(
+      #   description = "Example request body",
+      #   required = TRUE,
+      #   content = list(
+      #     `application/json` = list(
+      #       # OpenAPI 3.0 expects 'example' or 'examples' here
+      #       schema = list(
+      #         type = "object",
+      #         example = fromJSON("sample_request_update.json", simplifyVector = T)
+      #       )
+      #     )
+      #   )
+      # )
       
       api_url <- getOption(
         "plumber.apiURL",
