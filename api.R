@@ -1,5 +1,5 @@
-#* @apiTitle Moraizon Misc API
-#* @apiDescription Diese API bietet verschiedene Dienste fur Regionalstatistiken...
+#* @apiTitle <Title>
+#* @apiDescription <Meaningful description>
 #* @apiVersion 1.0.0
 #' @plumber
 function(pr) {
