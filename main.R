@@ -56,13 +56,6 @@ p_con <- dbConnect(
   dbname = pg_db
 )
 
-
-
-initial_params<-get_notfall_times_current(return_internal=T)
-initial_plot_params_notfall<-initial_params[[1]]
-initial_point_params_notfall<-initial_params[[2]]
-
-
 options(plumber.apiURL=current_url)
 
 
