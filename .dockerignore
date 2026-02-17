@@ -2,7 +2,6 @@
 .Rhistory
 .RData
 .Rproj.user/
-.Rprofile
 # We ignore the local library because Docker will 'restore' its own Linux version
 renv/library/
 renv/python/
