@@ -1,0 +1,9 @@
+core
+.Rproj.user*
+.Rhistory*
+.RData*
+.Ruserdata
+.Rproj.user
+local_dev
+test*
+base_open*

@@ -1,0 +1,23 @@
+# --- R Specifics ---
+.Rhistory
+.RData
+.Rproj.user/
+.Rprofile
+# We ignore the local library because Docker will 'restore' its own Linux version
+renv/library/
+renv/python/
+renv/staging/
+
+# --- Local Development Files ---
+# Ignore your local dev folder so your secret .env_local doesn't end up in the image
+local_dev/
+.env
+*.Rout
+
+# --- Git ---
+.git
+.gitignore
+
+# --- OS Specifics ---
+.DS_Store
+Thumbs.db

@@ -1,0 +1,12 @@
+services:
+  moraizon-notfallversorgung-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: moraizon-notfallversorgung-api
+    restart: "no"
+    ports:
+      - "7006:7006"
+    env_file:
+      - .env
+      
